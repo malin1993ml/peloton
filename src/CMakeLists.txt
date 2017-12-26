@@ -65,6 +65,14 @@ set_target_properties(peloton-bin PROPERTIES OUTPUT_NAME peloton)
 
 # --[ Benchmarks
 
+# --[ capnproto
+file(GLOB_RECURSE capnp_srcs ${PROJECT_SOURCE_DIR}/src/capnp/*client.c++)
+add_executable(capnp_client EXCLUDE_FROM_ALL ${capnp_srcs})
+target_link_libraries(capnp_client peloton)
+file(GLOB_RECURSE capnp_srcs ${PROJECT_SOURCE_DIR}/src/capnp/*server.c++)
+add_executable(capnp_server EXCLUDE_FROM_ALL ${capnp_srcs})
+target_link_libraries(capnp_server peloton)
+
 # --[ tpcc
 file(GLOB_RECURSE tpcc_srcs ${PROJECT_SOURCE_DIR}/src/main/tpcc/*.cpp)
 add_executable(tpcc EXCLUDE_FROM_ALL ${tpcc_srcs})
